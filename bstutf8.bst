@@ -2144,8 +2144,31 @@ FUNCTION {periodical} {
 FUNCTION {format.journal.title} {
   journal empty$
     { "" }
-    { new.block journal }
-  if$
+    { new.block  journal }
+if$
+
+  year empty$
+{ skip$ }
+{ journal empty$ 
+{ "" }
+{ bbl.comma }
+if$ 
+* year * }
+if$
+
+  volume empty$
+{ skip$ }
+{ year empty$ 
+{ "" }
+{ bbl.comma }
+if$ 
+* volume * }
+if$
+
+   number empty$
+{skip$}
+{ "~(" * number * ")" * }
+if$
 }
 
 % 连续出版物中析出的文献
@@ -2153,10 +2176,10 @@ FUNCTION {article}
 { start.entry
 
   format.authors "author" output.warn
-  format.book.title "title" output.warn
-  format.journal.title "journal" output.warn
-  format.year.volume.number output
-  format.pages "pages" output.warn
+  format.book.title "title" output.warn 
+  format.journal.title "journal" output.warn 
+%  format.year.volume.number output 
+  format.pages "pages" output.warn  
   format.reference.date output
   format.url output
   format.note output
